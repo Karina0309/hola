@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 import openpyxl
-
+from io import BytesIO
 
 # Cargar los datos
 file_path = "C:/Users/kema0/OneDrive/Documents/Maestria/4to Semestre/Seminario de profundizacion 1/Semana 3/Base_Financiero.xlsx"
