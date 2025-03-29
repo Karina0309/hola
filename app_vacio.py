@@ -2,13 +2,20 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
-import openpyxl
 from io import BytesIO
+import requests
 
-# Cargar los datos
-file_path = "C:/Users/kema0/OneDrive/Documents/Maestria/4to Semestre/Seminario de profundizacion 1/Semana 3/Base_Financiero.xlsx"
-finances_df = pd.read_excel(file_path, sheet_name='Finanzas')
+# URL corregida con raw
+url = "https://raw.githubusercontent.com/cdaniellopez8/financiero/master/Base_Financiero.xlsx"
 
+# Descargar el archivo
+response = requests.get(url)
+if response.status_code == 200:
+    file_path = BytesIO(response.content)
+    finances_df = pd.read_excel(file_path, sheet_name='Finanzas', engine="openpyxl")
+    st.write(finances_df.head())  # Mostrar datos en Streamlit
+else:
+    st.error("No se pudo descargar el archivo. Verifica la URL.")
 # Sidebar para el filtro de bancos
 st.sidebar.header("Bancos")
 bancos_disponibles=finances_df["Banco"].unique()
