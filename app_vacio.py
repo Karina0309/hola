@@ -138,3 +138,11 @@ st.write(f"El número de movimientos es de {len(finances_filtrado)}, siendo {len
 
 # Tabla detallada
 st.dataframe(finances_filtrado.head(10))
+
+
+# Información adicional
+margen = utilidad / total_recibido * 100 if total_recibido > 0 else 0
+st.subheader("Detalles de Movimientos")
+st.write(f"El número de movimientos es de {len(finances_filtrado)}, siendo {len(finances_filtrado[finances_filtrado['Forma de pago'] == 'Tarjeta'])} hechos con tarjeta, con un margen de ingreso de {margen:.2f} %")
+
+
