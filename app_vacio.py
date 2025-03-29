@@ -91,16 +91,16 @@ fig.update_layout(
 st.plotly_chart(fig)
 
 # La utilidad es la suma de 'Recibido' menos 'Pagado' - 'Impuesto' para cada ciudad
-utilidad_ciudad = finances_filtrado.groupby(["Ciudad","Tipo"])["valor de movimiento"].sum().unstack(fill_values=0)
-utilidad_ciudad['Impuesto'] = utilidad_ciudad["Recibido"]*0.15
-utilidad_ciudad['Utilidad'] = 
+utilidad_ciudad = finances_filtrado.groupby(['Ciudad','Tipo'])['Valor de movimiento'].sum().unstack(fill_value=0)
+utilidad_ciudad['Impuesto'] = utilidad_ciudad['Recibido']*0.15
+utilidad_ciudad['Utilidad'] = utilidad_ciudad['Recibido'] + utilidad_ciudad['Pagado'] - utilidad_ciudad['Impuesto']
 
 # Crear un diagrama de barras horizontales con colores personalizados según si la utilidad es positiva o negativa
 colores = ['green' if val > 0 else 'orange' for val in utilidad_ciudad['Utilidad']]
 
 fig2 = go.Figure(go.Bar(
-    x=# TU CÓDIGO,
-    y=# TU CÓDIGO
+    x= utilidad_ciudad['Utilidad'],
+    y= utilidad_ciudad.index,
     orientation='h',
     text=[f"${val/1e6:.1f} mill." for val in utilidad_ciudad['Utilidad']],
     marker_color=colores,  # Aplicar los colores según la condición
