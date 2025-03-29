@@ -16,6 +16,10 @@ if response.status_code == 200:
     st.write(finances_df.head())  # Mostrar datos en Streamlit
 else:
     st.error("No se pudo descargar el archivo. Verifica la URL.")
+
+
+
+
 # Sidebar para el filtro de bancos
 st.sidebar.header("Bancos")
 bancos_disponibles=finances_df["Banco"].unique()
